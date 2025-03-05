@@ -7,7 +7,6 @@ CREATE TABLE teams (
     team_id SERIAL PRIMARY KEY,
     team_name VARCHAR(100) UNIQUE NOT NULL,
     country TEXT NOT NULL,
-    stadium_name VARCHAR(100)
 );
 
 CREATE TABLE players (
@@ -16,4 +15,9 @@ CREATE TABLE players (
     position VARCHAR(50) CHECK (position IN ('Goalkeeper', 'Defender', 'Midfielder', 'Forward')),
     team_id INT REFERENCES teams(team_id) ON DELETE CASCADE
 );
+
+-- Step 2: Demonstrating ALTER commands
+ALTER TABLE teams ADD COLUMN stadium_name VARCHAR(100);
+ALTER TABLE teams ALTER COLUMN country TYPE TEXT;
+
 
