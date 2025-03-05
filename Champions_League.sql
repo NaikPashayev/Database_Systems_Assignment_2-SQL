@@ -2,6 +2,9 @@
 DROP TABLE IF EXISTS teams;
 DROP TABLE IF EXISTS players;
 DROP TABLE IF EXISTS matches;
+DROP TABLE IF EXISTS goals;
+DROP MATERIALIZED VIEW IF EXISTS match_summary;
+DROP VIEW IF EXISTS top_scorers;
 
 -- Step 1: Demonstrate the usage of PK and FK: Create two tables with the PK/FK relation.
 CREATE TABLE teams (
@@ -86,3 +89,17 @@ SELECT teams.team_name, players.player_name
 FROM teams
 FULL OUTER JOIN players ON teams.team_id = players.team_id;
 
+-- Step 5: Creation of regular and materialized views
+CREATE VIEW top_scorers AS
+SELECT players.player_name, COUNT(goals.goal_id) AS goals
+FROM players
+JOIN goals ON players.player_id = goals.player_id
+GROUP BY players.player_name
+ORDER BY goals DESC;
+
+CREATE MATERIALIZED VIEW match_summary AS
+SELECT matches.match_id, teams.team_name AS home_team, 
+       matches.home_score, matches.away_score, teams2.team_name AS away_team
+FROM matches
+JOIN teams AS teams ON matches.home_team = teams.team_id
+JOIN teams AS teams2 ON matches.away_team = teams2.team_id;
