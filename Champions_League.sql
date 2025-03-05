@@ -33,3 +33,56 @@ CREATE TABLE matches (
 );
 
 -- Step 4: Demonstrating Joins
+CREATE TABLE goals (
+    goal_id SERIAL PRIMARY KEY,
+    player_id INT REFERENCES players(player_id),
+    match_id INT REFERENCES matches(match_id),
+    minute_scored INT CHECK (minute_scored BETWEEN 1 AND 120)
+);
+
+-- Sample data
+INSERT INTO teams (team_name, country, stadium_name) VALUES
+('Real Madrid', 'Spain', 'Santiago Bernabéu'),
+('Manchester City', 'England', 'Etihad Stadium'),
+('Liverpool', 'England', 'Anfield'),
+('Barcelona', 'Spain', 'Camp Nou');
+
+INSERT INTO players (player_name, position, team_id) VALUES
+('Kylian Mbappe', 'Forward', 1),
+('Kevin De Bruyne', 'Midfielder', 2),
+('Virgil Van Dijk', 'Defender', 3),
+('Lamine Yamal', 'Forward', 4);
+
+INSERT INTO matches (home_team, away_team, match_date, home_score, away_score) VALUES
+(1, 2, '2025-03-10', 2, 1),
+(3, 4, '2025-03-11', 3, 2);
+
+INSERT INTO goals (player_id, match_id, minute_scored) VALUES
+(1, 1, 45),
+(2, 1, 60),
+(3, 2, 30),
+(4, 2, 75);
+
+-- Natural Join
+SELECT player_name, team_name FROM players NATURAL JOIN teams;
+
+-- Inner Join
+SELECT players.player_name, teams.team_name
+FROM players
+INNER JOIN teams ON players.team_id = teams.team_id;
+
+-- Left Outer Join
+SELECT teams.team_name, players.player_name
+FROM teams
+LEFT OUTER JOIN players ON teams.team_id = players.team_id;
+
+-- Right Outer Join
+SELECT teams.team_name, players.player_name
+FROM teams
+RIGHT OUTER JOIN players ON teams.team_id = players.team_id;
+
+-- Full Outer Join
+SELECT teams.team_name, players.player_name
+FROM teams
+FULL OUTER JOIN players ON teams.team_id = players.team_id;
+
