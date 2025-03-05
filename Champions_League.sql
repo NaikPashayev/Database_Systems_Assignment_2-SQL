@@ -17,3 +17,7 @@ CREATE TABLE players (
 );
 
 --Step 2 Demonstrate ALTER command to add a new column and update the column type.
+ALTER TABLE teams ADD COLUMN stadium_name VARCHAR(100);
+ALTER TABLE teams ALTER COLUMN country TYPE TEXT;
+
+--Step 3 
