@@ -5,6 +5,8 @@ DROP TABLE IF EXISTS matches;
 DROP TABLE IF EXISTS goals;
 DROP MATERIALIZED VIEW IF EXISTS match_summary;
 DROP VIEW IF EXISTS top_scorers;
+DROP TABLE IF EXISTS players_backup;
+DROP TABLE IF EXISTS new_players;
 
 -- Step 1: Demonstrate the usage of PK and FK: Create two tables with the PK/FK relation.
 CREATE TABLE teams (
@@ -103,3 +105,18 @@ SELECT matches.match_id, teams.team_name AS home_team,
 FROM matches
 JOIN teams AS teams ON matches.home_team = teams.team_id
 JOIN teams AS teams2 ON matches.away_team = teams2.team_id;
+
+-- Step 6: Demonstrating CREATE AS SELECT and INSERT AS SELECT
+CREATE TABLE players_backup AS
+SELECT player_id, player_name, position, team_id FROM players;
+
+CREATE TABLE new_players (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    role VARCHAR(50) NOT NULL
+);
+
+INSERT INTO new_players (name, role)
+SELECT player_name, position FROM players;
+
+-- Step 7: Demonstrating Commit and Rollback
