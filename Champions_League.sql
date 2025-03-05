@@ -20,4 +20,14 @@ CREATE TABLE players (
 ALTER TABLE teams ADD COLUMN stadium_name VARCHAR(100);
 ALTER TABLE teams ALTER COLUMN country TYPE TEXT;
 
---Step 3 
+--Step 3 Constraints (CHECK, UNIQUE, NOT NULL)
+CREATE TABLE matches (
+    match_id SERIAL PRIMARY KEY,
+    home_team INT REFERENCES teams(team_id),
+    away_team INT REFERENCES teams(team_id),
+    match_date DATE NOT NULL,
+    home_score INT CHECK (home_score >= 0),
+    away_score INT CHECK (away_score >= 0),
+    UNIQUE (home_team, away_team, match_date)
+);
+
