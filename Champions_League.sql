@@ -1,7 +1,7 @@
 --Step 1 Demonstrate the usage of PK and FK: Create two tables with the PK/FK relation.
 
-DROP TABLE IF EXISTS players;
-DROP TABLE IF EXISTS teams;
+DROP TABLE IF EXISTS players CASCADE;
+DROP TABLE IF EXISTS teams CASCADE;
 
 CREATE TABLE teams (
     team_id SERIAL PRIMARY KEY,
@@ -16,3 +16,4 @@ CREATE TABLE players (
     team_id INT REFERENCES teams(team_id) ON DELETE CASCADE
 );
 
+--Step 2 Demonstrate ALTER command to add a new column and update the column type.
