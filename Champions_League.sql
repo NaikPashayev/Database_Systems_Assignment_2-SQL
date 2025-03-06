@@ -51,23 +51,47 @@ INSERT INTO teams (team_name, country, stadium_name) VALUES
 ('Real Madrid', 'Spain', 'Santiago Bernabéu'),
 ('Manchester City', 'England', 'Etihad Stadium'),
 ('Liverpool', 'England', 'Anfield'),
-('Barcelona', 'Spain', 'Camp Nou');
+('Barcelona', 'Spain', 'Camp Nou'),
+('Bayern Munich', 'Germany', 'Allianz Arena'),
+('Paris Saint-Germain', 'France', 'Parc des Princes'),
+('Inter Milan', 'Italy', 'San Siro'),
+('Chelsea', 'England', 'Stamford Bridge');
 
 INSERT INTO players (player_name, position, team_id) VALUES
 ('Kylian Mbappe', 'Forward', 1),
 ('Kevin De Bruyne', 'Midfielder', 2),
 ('Virgil Van Dijk', 'Defender', 3),
-('Lamine Yamal', 'Forward', 4);
+('Lamine Yamal', 'Forward', 4),
+('Harry Kane', 'Forward', 5),
+('Ousmane Dembele', 'Forward', 6),
+('Lautaro Martinez', 'Forward', 7),
+('Enzo Fernandez', 'Midfielder', 8),
+('Jude Bellingham', 'Midfielder', 1),
+('Erling Haaland', 'Forward', 2),
+('Mohamed Salah', 'Forward', 3),
+('Pedri', 'Midfielder', 4);
 
 INSERT INTO matches (home_team, away_team, match_date, home_score, away_score) VALUES
 (1, 2, '2025-03-10', 2, 1),
-(3, 4, '2025-03-11', 3, 2);
+(3, 4, '2025-03-11', 3, 2),
+(5, 6, '2025-03-12', 2, 2),
+(7, 8, '2025-03-13', 1, 0),
+(1, 3, '2025-03-14', 3, 1),
+(2, 4, '2025-03-15', 2, 2);
 
 INSERT INTO goals (player_id, match_id, minute_scored) VALUES
 (1, 1, 45),
 (2, 1, 60),
 (3, 2, 30),
-(4, 2, 75);
+(4, 2, 75),
+(5, 3, 25),
+(6, 3, 50),
+(7, 4, 10),
+(8, 4, 80),
+(9, 5, 35),
+(10, 5, 55),
+(11, 6, 20),
+(12, 6, 70);
 
 -- Natural Join
 SELECT player_name, team_name FROM players NATURAL JOIN teams;
@@ -129,3 +153,4 @@ BEGIN;
 UPDATE players SET position = 'Forward' WHERE player_id = 1;
 COMMIT;
 
+select * from teams;
