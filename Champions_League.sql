@@ -1,12 +1,13 @@
 -- Dropping tables
-DROP TABLE IF EXISTS teams;
-DROP TABLE IF EXISTS players;
-DROP TABLE IF EXISTS matches;
-DROP TABLE IF EXISTS goals;
-DROP MATERIALIZED VIEW IF EXISTS match_summary;
-DROP VIEW IF EXISTS top_scorers;
-DROP TABLE IF EXISTS players_backup;
-DROP TABLE IF EXISTS new_players;
+DROP TABLE IF EXISTS goals CASCADE;
+DROP TABLE IF EXISTS players CASCADE;
+DROP TABLE IF EXISTS matches CASCADE;
+DROP TABLE IF EXISTS teams CASCADE;
+DROP TABLE IF EXISTS players_backup CASCADE;
+DROP TABLE IF EXISTS new_players CASCADE;
+DROP MATERIALIZED VIEW IF EXISTS match_summary CASCADE;
+DROP VIEW IF EXISTS top_scorers CASCADE;
+
 
 -- Step 1: Demonstrate the usage of PK and FK: Create two tables with the PK/FK relation.
 CREATE TABLE teams (
@@ -120,3 +121,11 @@ INSERT INTO new_players (name, role)
 SELECT player_name, position FROM players;
 
 -- Step 7: Demonstrating Commit and Rollback
+BEGIN;
+UPDATE players SET position = 'Midfielder' WHERE player_id = 1;
+ROLLBACK;
+
+BEGIN;
+UPDATE players SET position = 'Forward' WHERE player_id = 1;
+COMMIT;
+
