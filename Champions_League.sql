@@ -1,3 +1,8 @@
+-- Hello Jamaladdin Muellim, I hope you are reading this. Basically, I commited all of my code to
+-- wrong repository, I created my own repository and worked on my code there. This is the repository
+-- https://github.com/NaikPashayev/Database_Systems_Assignment_2-SQL
+-- I hope this will not cause a problem. Thank you very much :)
+
 -- Dropping tables
 DROP TABLE IF EXISTS goals CASCADE;
 DROP TABLE IF EXISTS players CASCADE;
