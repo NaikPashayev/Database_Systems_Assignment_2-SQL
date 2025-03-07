@@ -153,4 +153,5 @@ BEGIN;
 UPDATE players SET position = 'Forward' WHERE player_id = 1;
 COMMIT;
 
-select * from teams;
+-- Testing here
+
